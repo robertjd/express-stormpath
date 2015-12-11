@@ -116,7 +116,7 @@ block body
               .form-group.group-directory-name
                 label(class='#{cls}') Organization
                 div(class='#{cls}')
-                  input.form-control(placeholder='My Company', required=true, type='text', name='directoryName')
+                  input.form-control(placeholder='My Company', required=true, type='text', name='organizationNameKey', value=form.data ? form.data.organizationNameKey : '')
               div
                 button.login.btn.btn-login.btn-sp-green(type='submit') Log In
 
