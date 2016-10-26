@@ -15,7 +15,7 @@ web:
 
     # Function used to resolve the organization to use. If null, then the default
     # organization resolver is used.
-    organizationResolver: null
+    organizationResolver: null # should this be added to the framework spec?
 
     # If useSubdomain=true, we attempt to resolve the organization context by
     # looking at the subdomain, e.g. org-a.example.com.  Otherwise we will
