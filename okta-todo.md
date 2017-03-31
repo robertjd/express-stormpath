@@ -22,6 +22,9 @@ Todo tasks (discovered while implemented Primary goals):
 [ ] authenticationResult should preserved, as much as possible
 [X] Transform the okta user object to the existing Stormpath account object, so that req.user.foo references will not break
 [ ] Invalid grant needs to be presented as "username or password"
+[ ] Ensure that the two custom data import strategies will be populated onto the same custom data models and interfaces that we already have
+[ ] Registration error messages need better display to the end user
+[ ] Registration needs to map the user to the application
 
 # Configuration assumptions
 
