@@ -141,6 +141,15 @@ var userSchemaProperties = {
       id: '#Custom',
       type: 'object',
       properties: {
+        color: {
+          title: 'Favorite Color',
+          description: 'Used by registration tests',
+          type: 'string',
+          required: false,
+          minLength: 1,
+          maxLength: 64,
+          permissions: []
+        },
         emailVerificationToken: {
           title: 'Email Verification Token',
           description: 'Can be sent to the user to verify their email address',
@@ -157,6 +166,15 @@ var userSchemaProperties = {
           required: false,
           minLength: 1,
           maxLength: 32,
+          permissions: []
+        },
+        music: {
+          title: 'Music Preference',
+          description: 'Used by registration tests',
+          type: 'string',
+          required: false,
+          minLength: 1,
+          maxLength: 64,
           permissions: []
         }
       },

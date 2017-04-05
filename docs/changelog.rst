@@ -52,7 +52,13 @@ Or through the following environment variables:
 
 **Breaking Changes**
 
-- ``req.app.get('stormpathApplication')`` will be undefined.
+- ``req.app.get('stormpathApplication')`` will now be an Okta application, which has different behavior than a Stormpath application.
+
+- Custom data properties must be declared on the Okta User Schema
+
+- Email verficiation is now enabled by local configuration
+
+- Your web application must use the postRegistrationHandler to send an email to the user
 
 **Potentially Breaking Changes**
 

@@ -24,10 +24,7 @@ var SpaRootFixture = require('../fixtures/spa-root-fixture');
  * @param {object} stormpathApplication
  */
 function DefaultRegistrationFixture(stormpathApplication) {
-  this.expressApp = helpers.createStormpathExpressApp({
-    application: {
-      href: stormpathApplication.href
-    },
+  this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
     },
@@ -98,6 +95,23 @@ DefaultRegistrationFixture.prototype.defaultJsonViewModel = {
   }
 };
 
+function VerificationRequiredFixture(stormpathApplication) {
+  this.expressApp = helpers.createOktaExpressApp({
+    cacheOptions: {
+      ttl: 0
+    },
+    web: {
+      register: {
+        enabled: true,
+        emailVerificationRequired: true
+      }
+    }
+  });
+  return this;
+}
+
+VerificationRequiredFixture.prototype.defaultFormPost = DefaultRegistrationFixture.prototype.defaultFormPost;
+
 /**
  * Creates an Express application and configures the register feature with the
  * surname and given name as optional (not required) fields.
@@ -108,10 +122,7 @@ DefaultRegistrationFixture.prototype.defaultJsonViewModel = {
  * @param {object} stormpathApplication
  */
 function NamesOptionalRegistrationFixture(stormpathApplication) {
-  this.expressApp = helpers.createStormpathExpressApp({
-    application: {
-      href: stormpathApplication.href
-    },
+  this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
     },
@@ -171,10 +182,7 @@ NamesOptionalRegistrationFixture.prototype.namesProvidedFormPost = function () {
  * @param {object} stormpathApplication
  */
 function NamesDisabledRegistrationFixture(stormpathApplication) {
-  this.expressApp = helpers.createStormpathExpressApp({
-    application: {
-      href: stormpathApplication.href
-    },
+  this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
     },
@@ -218,10 +226,7 @@ NamesDisabledRegistrationFixture.prototype.defaultFormPost = function () {
  * @param {object]} stormpathApplication
  */
 function CustomFieldRegistrationFixture(stormpathApplication) {
-  this.expressApp = helpers.createStormpathExpressApp({
-    application: {
-      href: stormpathApplication.href
-    },
+  this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
     },
@@ -300,7 +305,7 @@ function assertCustomDataRegistration(fixture, formData, done) {
       return done(err);
     }
 
-    fixture.expressApp.get('stormpathApplication').getAccounts({ email: formData.email }, function (err, accounts) {
+    fixture.expressApp.get('stormpathClient').getAccounts({ q: formData.email }, function (err, accounts) {
       if (err) {
         return done(err);
       }
@@ -357,7 +362,9 @@ describe('register', function () {
           namesOptionalRegistrationFixture.expressApp.on('stormpath.ready', function () {
             namesDisabledRegistrationFixture = new NamesDisabledRegistrationFixture(stormpathApplication);
             namesDisabledRegistrationFixture.expressApp.on('stormpath.ready', function () {
-              app.createAccount(existingUserData, done);
+              // debugger
+              // app.createAccount(existingUserData, done);
+              done();
             });
           });
         });
@@ -365,9 +372,9 @@ describe('register', function () {
     });
   });
 
-  after(function (done) {
-    helpers.destroyApplication(stormpathApplication, done);
-  });
+  // after(function (done) {
+  //   helpers.destroyApplication(stormpathApplication, done);
+  // });
 
   describe('by default', function () {
 
@@ -397,7 +404,7 @@ describe('register', function () {
   describe('with a custom uri', function () {
     var app;
     before(function (done) {
-      app = helpers.createStormpathExpressApp({
+      app = helpers.createOktaExpressApp({
         application: {
           href: stormpathApplication.href
         },
@@ -426,23 +433,15 @@ describe('register', function () {
     });
   });
 
+  // need to add a case for when verification is disabled
+
   describe('if email verification is enabled', function () {
 
-    var fixture;
+    var fixture = new VerificationRequiredFixture(stormpathApplication);;
 
-    before(function (done) {
-      helpers.setEmailVerificationStatus(stormpathApplication, 'ENABLED', function (err) {
-        if (err) {
-          return done(err);
-        }
-        fixture = new DefaultRegistrationFixture(stormpathApplication);
-        fixture.expressApp.on('stormpath.ready', done);
-      });
-    });
-
-    after(function (done) {
-      helpers.setEmailVerificationStatus(stormpathApplication, 'DISABLED', done);
-    });
+    // before(function (done) {
+    //   fixture.expressApp.on('stormpath.ready', done);
+    // });
 
     it('should return the user to the login page with ?status=unverified', function (done) {
 
@@ -488,6 +487,7 @@ describe('register', function () {
             assert.equal(json.account.surname, formData.surname);
             assert.equal(json.account.email, formData.email);
             assert.equal(json.account.emailVerificationToken, undefined);
+            assert.equal(json.account.emailVerificationStatus, 'UNVERIFIED');
 
             done();
           });
@@ -947,7 +947,7 @@ describe('register', function () {
       var app;
 
       before(function (done) {
-        app = helpers.createStormpathExpressApp({
+        app = helpers.createOktaExpressApp({
           application: {
             href: stormpathApplication.href
           },
@@ -1018,7 +1018,7 @@ describe('register', function () {
               return done(err);
             }
 
-            stormpathApplication.getAccounts({ email: formData.email }, function (err, accounts) {
+            stormpathClient.getAccounts({ q: formData.email }, function (err, accounts) {
               if (err) {
                 return done(err);
               }
@@ -1077,7 +1077,7 @@ describe('register', function () {
               return done(err);
             }
 
-            stormpathApplication.getAccounts({ email: formData.email }, function (err, accounts) {
+            stormpathClient.getAccounts({ q: formData.email }, function (err, accounts) {
               if (err) {
                 return done(err);
               }
