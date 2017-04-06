@@ -23,7 +23,7 @@ var SpaRootFixture = require('../fixtures/spa-root-fixture');
  *
  * @param {object} stormpathApplication
  */
-function DefaultRegistrationFixture(stormpathApplication) {
+function DefaultRegistrationFixture() {
   this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
@@ -95,7 +95,7 @@ DefaultRegistrationFixture.prototype.defaultJsonViewModel = {
   }
 };
 
-function VerificationRequiredFixture(stormpathApplication) {
+function VerificationRequiredFixture() {
   this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
@@ -121,7 +121,7 @@ VerificationRequiredFixture.prototype.defaultFormPost = DefaultRegistrationFixtu
  *
  * @param {object} stormpathApplication
  */
-function NamesOptionalRegistrationFixture(stormpathApplication) {
+function NamesOptionalRegistrationFixture() {
   this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
@@ -181,7 +181,7 @@ NamesOptionalRegistrationFixture.prototype.namesProvidedFormPost = function () {
  *
  * @param {object} stormpathApplication
  */
-function NamesDisabledRegistrationFixture(stormpathApplication) {
+function NamesDisabledRegistrationFixture() {
   this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
@@ -225,7 +225,7 @@ NamesDisabledRegistrationFixture.prototype.defaultFormPost = function () {
  *
  * @param {object]} stormpathApplication
  */
-function CustomFieldRegistrationFixture(stormpathApplication) {
+function CustomFieldRegistrationFixture() {
   this.expressApp = helpers.createOktaExpressApp({
     cacheOptions: {
       ttl: 0
@@ -330,20 +330,13 @@ function assertCustomDataRegistration(fixture, formData, done) {
   };
 }
 
-describe('register', function () {
+describe.only('register', function () {
   var stormpathApplication;
   var stormpathClient;
   var customFieldRegistrationFixture;
   var defaultRegistrationFixture;
   var namesDisabledRegistrationFixture;
   var namesOptionalRegistrationFixture;
-
-  var existingUserData = {
-    givenName: uuid.v4(),
-    surname: uuid.v4(),
-    email: 'robert+' + uuid.v4() + '@stormpath.com',
-    password: uuid.v4() + uuid.v4().toUpperCase() + '!'
-  };
 
   before(function (done) {
     stormpathClient = helpers.createClient();
@@ -437,7 +430,7 @@ describe('register', function () {
 
   describe('if email verification is enabled', function () {
 
-    var fixture = new VerificationRequiredFixture(stormpathApplication);;
+    var fixture = new VerificationRequiredFixture(stormpathApplication);
 
     // before(function (done) {
     //   fixture.expressApp.on('stormpath.ready', done);
