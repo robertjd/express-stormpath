@@ -365,10 +365,6 @@ describe.only('register', function () {
     });
   });
 
-  // after(function (done) {
-  //   helpers.destroyApplication(stormpathApplication, done);
-  // });
-
   describe('by default', function () {
 
     it('should bind to GET /register by default', function (done) {
