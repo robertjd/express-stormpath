@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Express Sample Project",
+            "program": "/Users/robert/projects/express-stormpath-sample-project/server.js",
+            "cwd": "/Users/robert/projects/express-stormpath-sample-project",
+            "env": {
+                "STORMPATH_CLIENT_APIKEY_ID": "238BHTCA9WS8D12NRGL1NN1SF",
+                "STORMPATH_CLIENT_APIKEY_SECRET": "yAlKNBg6WgsP9ujldvSfADLsUsFtuw6JdpBHZ36lq8Y",
+                "STORMPATH_APPLICATION_HREF": "https://api.stormpath.com/v1/applications/24k7HnDOz4tQ9ARsBtPUN6"
+            }
+        }
+    ]
+}

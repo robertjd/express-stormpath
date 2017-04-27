@@ -1,0 +1,8 @@
+{
+    "cSpell.enabled": false,
+    "eslint.enable": true,
+    "files.exclude": {
+
+        "coverage": true
+    }
+}

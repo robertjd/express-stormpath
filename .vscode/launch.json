@@ -1,0 +1,115 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Express Sample Project",
+            "program": "/Users/robert/projects/express-stormpath-sample-project/server.js",
+            "cwd": "/Users/robert/projects/express-stormpath-sample-project",
+            "env": {
+                "OKTA_APPLICATION_ID": "0oaa9plwusab0NlLu0h7",
+                "OKTA_APITOKEN": "00jhw_n7RmbOlL04wVlbg9Qc8KUcTOaKxrbxrSZUse",
+                "OKTA_ORG": "https://dev-447143.oktapreview.com/"
+            },
+            "runtimeArgs": [
+                "--preserve-symlinks"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Express Sample Project - Stormpath",
+            "program": "/Users/robert/projects/express-stormpath-sample-project-for-stormpath/server.js",
+            "cwd": "/Users/robert/projects/express-stormpath-sample-project-for-stormpath",
+            "env": {
+                "STORMPATH_CLIENT_APIKEY_ID": "238BHTCA9WS8D12NRGL1NN1SF",
+                "STORMPATH_CLIENT_APIKEY_SECRET": "yAlKNBg6WgsP9ujldvSfADLsUsFtuw6JdpBHZ36lq8Y",
+                "STORMPATH_APPLICATION_HREF": "https://api.stormpath.com/v1/applications/24k7HnDOz4tQ9ARsBtPUN6"
+            },
+            "runtimeArgs": [
+                "--preserve-symlinks"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Express Sample Project - 883844",
+            "program": "/Users/robert/projects/express-stormpath-sample-project/server.js",
+            "cwd": "/Users/robert/projects/express-stormpath-sample-project",
+            "env": {
+                "OKTA_APPLICATION_ID": "0oaa82xw2xy3liDnK0h7",
+                "OKTA_APITOKEN": "00eQqbeD3TrXTv74OZ0WCEDCYeGiKRDeQnmca3qZ1v",
+                "OKTA_ORG": "https://dev-883844.oktapreview.com/"
+            },
+            "runtimeArgs": [
+                "--preserve-symlinks"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Express Sample Project - 823303",
+            "program": "/Users/robert/projects/express-stormpath-sample-project/server.js",
+            "cwd": "/Users/robert/projects/express-stormpath-sample-project",
+            "env": {
+                "OKTA_APPLICATION_ID": "0oaa8ofze83VLP1oo0h7",
+                "OKTA_APITOKEN": "009F5k3FiwyMSiKbe_7df0TLPMHhb6jffqGDbe6Y57",
+                "OKTA_ORG": "https://dev-823303.oktapreview.com/"
+            },
+            "runtimeArgs": [
+                "--preserve-symlinks"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Express Angular Sample Project",
+            "program": "/Users/robert/projects/express-stormpath-angular-sample-project/server/server.js",
+            "cwd": "/Users/robert/projects/express-stormpath-angular-sample-project",
+            "env": {
+                "OKTA_APPLICATION_ID": "0oaa4g2nueiExgODD0h7",
+                "OKTA_APITOKEN": "00jhw_n7RmbOlL04wVlbg9Qc8KUcTOaKxrbxrSZUse",
+                "OKTA_ORG": "https://dev-447143.oktapreview.com/"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Okta Data Tool",
+            "program": "${workspaceRoot}/util/okta-test-data.js",
+            "cwd": "/Users/robert/projects/express-stormpath",
+            "env": {
+                "OKTA_APITOKEN": "00jhw_n7RmbOlL04wVlbg9Qc8KUcTOaKxrbxrSZUse",
+                "OKTA_ORG": "https://dev-447143.oktapreview.com/"
+            }
+        },
+        {
+            "name": "Express Tests",
+            "type": "node",
+            "program": "/Users/robert/.nvm/versions/node/v6.4.0/bin/_mocha",
+            "stopOnEntry": false,
+            "args": ["test/controllers/test-email-verification.js","--no-timeouts"],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "env": {
+                "OKTA_APPLICATION_ID": "0oaa4g2nueiExgODD0h7",
+                "OKTA_APITOKEN": "00jhw_n7RmbOlL04wVlbg9Qc8KUcTOaKxrbxrSZUse",
+                "OKTA_ORG": "https://dev-447143.oktapreview.com/",
+                "OKTA_TEST_LOGIN_USERNAME": "test@example.com",
+                "OKTA_TEST_LOGIN_PASSWORD": "PasswordAbc1234"
+            }
+        },
+        {
+
+			"name": "Debug Mocha Test",
+			"type": "node",
+			"address": "localhost",
+			"port": 5858,
+			"sourceMaps": false
+        }
+    ]
+}
