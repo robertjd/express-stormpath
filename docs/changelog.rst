@@ -6,6 +6,13 @@ Change Log
 
 All library changes, in descending order.
 
+Version 4.0.0-rc3
+-----------------
+
+Social login
+
+- need to add `callbacks/google` etc to your application
+
 Version 4.0.0-rc2
 -----------------
 
