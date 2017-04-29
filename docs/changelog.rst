@@ -6,6 +6,15 @@ Change Log
 
 All library changes, in descending order.
 
+Version 4.0.0-rc3
+-----------------
+
+Social login
+
+- need to add `callbacks/google` etc to your application
+- github is not coming over
+- this is only working for page-based redirect flows right now
+
 Version 4.0.0-rc2
 -----------------
 
