@@ -60,16 +60,19 @@ describe('getToken (OAuth2 token exchange endpoint)', function () {
 
           stormpathAccountApiKey = key;
 
-          enabledFixture.expressApp.on('stormpath.ready', ready);
-          disabledFixture.expressApp.on('stormpath.ready', ready);
-
+          done();
         });
       });
     });
   });
 
   after(function (done) {
-    helpers.destroyApplication(stormpathApplication, done);
+    stormpathAccount.delete(function (err) {
+      if (err) {
+        return done(err);
+      }
+      stormpathAccount.delete(done);
+    });
   });
 
   it('should return 405 if <config.web.oauth2.uri> is enabled and a non-POST request is made', function (done) {
@@ -165,13 +168,14 @@ describe('getToken (OAuth2 token exchange endpoint)', function () {
 
   });
 
-  it('should return an access token & refresh token if grant_type=password and the username & password are valid', function (done) {
+  it.only('should return an access token & refresh token if grant_type=password and the username & password are valid', function (done) {
 
     request(enabledFixture.expressApp)
       .post('/oauth/token')
       .send('grant_type=password')
       .send('username=' + accountData.email)
       .send('password=' + accountData.password)
+      .send('scope=offline_access')
       .expect(200)
       .end(function (err, res) {
         assert(res.body && res.body.access_token);

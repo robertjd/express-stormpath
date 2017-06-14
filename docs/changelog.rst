@@ -6,6 +6,15 @@ Change Log
 
 All library changes, in descending order.
 
+Oauth Changes
+
+The Stormpath API provided an OAuth server for each Stormpath application, and this library provides an ``/oauth/token`` endpoint, which proxies the request to the OAuth server of the configured Stormpath application.  This is still true with Okta, however the Okta OAuth Sever (called `Authorization Servers`_) have some differences:
+
+* Informative: Access token requests must be an OpenID Connect (OIDC) request, and the ``openid`` scope must be added to the request if you want an access token.  Internally we add this for you if no scope has been added to the request.
+* Breaking: It is no longer possible to make use of the `scope factory feature`_ to add custom scopes to the issued tokens.  The scope claim of access tokens will reflect what you requestd of the authorization server.
+* Breaking: If you want to get a refresh token while doing ``grant_type=password``, you need to add the ``offline_access`` scope to the request.
+* Breaking: Refresh tokens are now opaque, and do not contain references to the authenticated subject.  However the `Introspection Request`_ endpoint can be used to get information about the subject.
+
 Version 4.0.0-rc3
 -----------------
 
@@ -1678,10 +1687,14 @@ Version 0.1.0
 - Basic docs.
 - Lots to do!
 
-.. _stormpath-migration tool: https://github.com/okta/stormpath-migration
-.. _Stormpath-Okta Customer FAQ: https://stormpath.com/oktaplusstormpath
-.. _Okta Schema API:  http://developer.okta.com/docs/api/resources/schemas.html
+.. _Authorization Servers: https://developer.okta.com/use_cases/api_access_management/
+.. _Introspection Request: https://developer.okta.com/docs/api/resources/oidc.html#introspection-request
 .. _Okta User Status: http://developer.okta.com/docs/api/resources/users.html#user-status
+.. _Okta Schema API:  http://developer.okta.com/docs/api/resources/schemas.html
+.. _scope factory feature: https://docs.stormpath.com/nodejs/jsdoc/ScopeFactoryAuthenticator.html
+.. _stormpath-migration tool: https://github.com/okta/stormpath-migration
 .. _Stormpath Node SDK: https://github.com/stormpath/stormpath-sdk-node
+.. _Stormpath-Okta Customer FAQ: https://stormpath.com/oktaplusstormpath
 .. _Web Configuration Defaults: https://github.com/stormpath/express-stormpath/blob/master/lib/config.yml
 .. _Test Data Script: https://github.com/stormpath/express-stormpath/blob/4.0.0/util/okta-test-data.js
+
